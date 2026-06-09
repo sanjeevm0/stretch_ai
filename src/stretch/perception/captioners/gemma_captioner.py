@@ -107,7 +107,6 @@ class GemmaCaptioner:
 
         return output_text
 
-
 if __name__ == "__main__":
     captioner = GemmaCaptioner()
     caption = captioner.caption_image(Image.open("example.jpg"))

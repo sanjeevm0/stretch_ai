@@ -39,14 +39,14 @@ def key_pressed(robot: HomeRobotZmqClient, key):
     print(f"Key '{key}' was pressed {xyt}")
     goal_xyt = np.array([0.0, 0.0, 0.0])
     if key == "w":
-        goal_xyt[0] = 0.15
+        goal_xyt[0] = 0.1
     elif key == "s":
-        goal_xyt[0] = -0.15
+        goal_xyt[0] = -0.1
     elif key == "a":
-        goal_xyt[2] = 0.25
+        goal_xyt[2] = 0.2
     elif key == "d":
-        goal_xyt[2] = -0.25
-    robot.move_base_to(goal_xyt, relative=True, blocking=False)
+        goal_xyt[2] = -0.2
+    robot.move_base_to(goal_xyt, relative=True)
 
 
 def getch():

@@ -135,9 +135,7 @@ def get_llm_client(
     if "gemma" in client_type:
         # We assume the user enter gemma, gemma4b, or gemma1b
         if client_type not in ["gemma", "gemma4b", "gemma1b"]:
-            raise ValueError(
-                f"Invalid model size: {client_type}, we only support gemma, gemma4b, and gemma1b"
-            )
+            raise ValueError(f"Invalid model size: {client_type}, we only support gemma, gemma4b, and gemma1b")
         elif client_type == "gemma":
             model_size = "1b"
         else:

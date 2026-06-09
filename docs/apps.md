@@ -75,7 +75,7 @@ Visualize output from the cameras and other sensors on the robot. This will open
 python -m stretch.app.view_images --robot_ip $ROBOT_IP
 ```
 
-You can also visualize it with semantic segmentation (defaults to [YOLOE](https://docs.ultralytics.com/models/yoloe/):
+You can also visualize it with semantic segmentation (defaults to [Detic](https://github.com/facebookresearch/Detic/):
 
 ```bash
 python -m stretch.app.view_images --robot_ip $ROBOT_IP ----run_semantic_segmentation
@@ -108,6 +108,13 @@ Open and close the gripper:
 ```
 python -m stretch.app.gripper --robot_ip $ROBOT_IP --open
 python -m stretch.app.gripper --robot_ip $ROBOT_IP --close
+```
+
+Alternately:
+
+```
+python -m stretch.app.open_gripper --robot_ip $ROBOT_IP
+python -m stretch.app.close_gripper --robot_ip $ROBOT_IP
 ```
 
 #### Rerun Web Server
@@ -221,6 +228,14 @@ python -m stretch.app.read_map -i hq_small.pkl --test-remove --show-instances --
 ```
 
 ## Experimental
+
+### VLM Planning
+
+This is an experimental app that uses the voxel map to plan a path to a goal. It is not yet fully functional.
+
+```bash
+python -m stretch.app.vlm_planning
+```
 
 ### Open-Vocabulary Mobile Manipulation
 

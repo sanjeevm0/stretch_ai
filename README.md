@@ -29,11 +29,6 @@ We recommend the following hardware to run Stretch AI. Other GPUs and other vers
 - **Computer with an NVIDIA GPU**
   - The computer should be running Ubuntu 22.04. Later versions might work, but have not been tested.
   - Most of our testing has used a high-end CPU with an NVIDIA GeForce RTX 4090.
-- **Microphone connected to the GPU computer**
-  - Required when using voice-enabled features such as:
-    ```bash
-    python -m stretch.app.ai_pickup --use_llm --use_voice
-    ```
 - **Dedicated WiFi access point**
   - Performance depends on high-bandwidth, low-latency wireless communication between the robot and the GPU computer.
   - The official [Stretch WiFi Access Point](https://hello-robot.com/stretch-access-point) provides a tested example.
@@ -44,7 +39,7 @@ We recommend the following hardware to run Stretch AI. Other GPUs and other vers
 
 Artificial intelligence (AI) for robots often has complex dependencies, including the need for trained models. Consequently, installing *stretch-ai* from source can be challenging.
 
-First, you will need to install software on your Stretch robot and another computer with a GPU (*GPU computer*). Use the following link to go to the installation instructions: [Instructions for Installing Stretch AI](./docs/start_with_docker_plus_virtenv.md)
+First, you will need to install software on your Stretch robot and another computer with a GPU (*GPU computer*). Use the following link to go to the installation instructions: [Instructions for Installing Stretch AI](https://github.com/hello-robot/stretch_ai/blob/main/docs/start_with_docker_plus_virtenv.md)
 
 Once you've completed this installation, you can start the server on your Stretch robot.  Prior to running the script, you need to have homed your robot with `stretch_robot_home.py`. Then, run the following command:
 

@@ -26,7 +26,7 @@ from stretch.utils.config import get_full_config_path
 
 class OvmmPerception:
     """
-    Wrapper around perception models for use in OVMM Agent.
+    Wrapper around DETIC for use in OVMM Agent.
     It performs some preprocessing of observations necessary for OVMM skills.
     It also maintains a list of vocabularies to use in segmentation and can switch between them at runtime.
     """
@@ -48,7 +48,11 @@ class OvmmPerception:
         self._current_vocabulary_id: int = None
         self.verbose = verbose
 
-        if self._detection_module == "sam2":
+        if self._detection_module == "mobile_sam":
+            from stretch.perception.detection.mobile_sam import MobileSAMPerception
+
+            self._segmentation = MobileSAMPerception()
+        elif self._detection_module == "sam2":
             from stretch.perception.detection.sam2 import SAM2Perception
 
             self._segmentation = SAM2Perception()

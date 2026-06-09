@@ -38,10 +38,6 @@ def main(
         enable_rerun_server=False,
     )
     robot.start()
-    # Check robot status first
-    print(f"Robot IP: {robot_ip}")
-    print(f"Robot was homed: {robot.is_homed}")
-    print(f"Robot is runstopped: {robot.is_runstopped}")
     try:
         while True:
             joint_state = robot.get_joint_positions()
@@ -53,7 +49,7 @@ def main(
                 print(
                     f"Arm: {joint_state[HelloStretchIdx.ARM]}, Lift: {joint_state[HelloStretchIdx.LIFT]}, Gripper: {joint_state[HelloStretchIdx.GRIPPER]}"
                 )
-            time.sleep(0.5)
+            time.sleep(0.01)
 
     except KeyboardInterrupt:
         pass

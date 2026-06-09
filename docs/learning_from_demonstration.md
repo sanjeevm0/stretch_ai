@@ -32,9 +32,7 @@ Our LfD code is a [fork of LeRobot](https://github.com/hello-robot/lerobot). The
 
 ## Format data and push to huggingface repo
 
-### [Authenticate with huggingface-cli](https://huggingface.co/docs/huggingface_hub/en/guides/cli) 
-
-You should finish this before doing the remaining steps or you might waste 1 hour in uploading dataset to huggingface.
+### [Authenticate with huggingface-cli](https://huggingface.co/docs/huggingface_hub/en/guides/cli)
 
 ### Optional: login to weights and biases (wandb)
 
@@ -264,7 +262,7 @@ Locations in this demo are pre-saved as { name: (x,y,theta) } pairs based on an 
 Enter a long horizon task: Can you bring me the bottle that's inside the cabinet? You might need to open the cabinet first, also do not use detections
 Generated plan:
 ```python
-def execute_task(go_to, pick, place, say, open_cabinet, close_cabinet, wave):
+def execute_task(go_to, pick, place, say, open_cabinet, close_cabinet, wave, get_detections):
     if go_to("cabinet"):
         if open_cabinet():
             if pick("bottle"):

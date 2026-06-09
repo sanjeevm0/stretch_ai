@@ -10,29 +10,54 @@ Before you start trying docker, unplug the USB dongle on the robot.
 
 Start by installing docker on your robot:
 
-```bash
+```
 sudo apt-get update
 sudo apt-get install docker.io
 ```
 
-Add your user to the docker group (so sudo is not required):
+### Optional: Setup Docker Group So You Do Not Need To Use `sudo`
+
+You can add your user to the `docker` group so you do not need to use `sudo` to run Docker commands. To do this, run the following command:
+
+1. Create the docker group if it doesn't already exist:
+
+```bash
+sudo groupadd docker
+```
+
+2. Add your user to the docker group:
 
 ```bash
 sudo usermod -aG docker $USER
-newgrp docker
 ```
 
-Verify the installation:
+3. Restart the Docker service:
+
+```bash
+sudo systemctl restart docker
+```
+
+4. Log out and log back in so that your group membership is re-evaluated. Then you can verify that you can run Docker commands without sudo:
 
 ```bash
 docker run hello-world
 ```
 
-You should see:
+If you want to run a docker command without logging out, you can run the following command:
 
 ```bash
-Hello from Docker!
+newgrp docker
 ```
+
+This will change your group to the `docker` group for the current terminal session.
+
+**When performing these steps on your robot, you may find that logging out fails to make docker group membership take effect.** In this case, you can try restarting Docker with the following command:
+
+```bash
+sudo systemctl restart docker
+```
+
+If this doesn't work, we recommend that you reboot your robot's computer.
 
 
 ### Clone the Stretch-AI Repository on your robot
@@ -45,11 +70,7 @@ git clone https://github.com/hello-robot/stretch_ai.git
 
 ### Run the Robot's Script
 
-The GitHub *stretch-ai* repository provides a startup script for running *stretch-ai* software in a Docker container on your Stretch robot. Prior to running the script, you need to have homed your robot:
- 
-```bash 
-stretch_robot_home.py
-```
+The GitHub *stretch-ai* repository provides a startup script for running *stretch-ai* software in a Docker container on your Stretch robot. Prior to running the script, you need to have homed your robot with `stretch_robot_home.py`.
 
 To use the Docker script, run the following command in the *stretch-ai* repository on the robot:
 
@@ -115,18 +136,9 @@ First, check to see if mamba is installed on your computer:
 mamba
 ```
 
-If you get an "command not found" error, then you have not yet installed mamba.
-
-Follow the install instructions for mamba [here](https://github.com/conda-forge/miniforge#download), also shown below
-
-```bash
-curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
-bash Miniforge3-$(uname)-$(uname -m).sh
-```
+If you get an "command not found" error, then follow the install instructions for mamba here: https://github.com/conda-forge/miniforge#download
 
 Make sure to run `mamba init` and restart your terminal before proceeding.
-
-Run `mamba activate` if not already in the base environment
 
 Then, run:
 
@@ -175,6 +187,31 @@ git submodule update --init --recursive
 You can pass the `--conda` flag into the install script if you have it installed:
 ```bash
 ./install.sh --conda
+```
+
+##### Manual Perception Installation
+
+If you don't have CUDA installed or don't know what it is, you can answer **no** to the prompt to install Detic. If you do have CUDA installed, you can answer **yes** to the prompt to install Detic.
+
+If you answered no, you can then install Detic manually. Take note of the name of the environment. It will be something like `stretch_ai_<version>`.
+
+Next, run:
+
+```bash
+# Install detectron2 for perception (required by Detic)
+git submodule update --init --recursive
+cd third_party/detectron2
+pip install -e .
+
+# Install Detic for perception
+cd ../../src/stretch/perception/detection/detic/Detic
+# Make sure it's up to date
+git submodule update --init --recursive
+pip install -r requirements.txt
+
+# Download DETIC checkpoint...
+mkdir -p models
+wget --no-check-certificate https://dl.fbaipublicfiles.com/detic/Detic_LCOCOI21k_CLIP_SwinB_896b32_4x_ft4x_max-size.pth -O models/Detic_LCOCOI21k_CLIP_SwinB_896b32_4x_ft4x_max-size.pth
 ```
 
 ## Simple Installation Test

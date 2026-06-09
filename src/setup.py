@@ -57,7 +57,7 @@ setuptools.setup(
         # For gemini
         "google-genai",
         # For Yolo
-        "ultralytics==8.3.161",
+        "ultralytics>=8.3.146",
         # Hardware dependencies
         "hello-robot-stretch-urdf",
         "pyrealsense2",
@@ -72,16 +72,14 @@ setuptools.setup(
         "hydra-core",
         "timm>1.0.0",
         "huggingface_hub[cli]>=0.24.7",
-        # For mobile clip
         "open-clip-torch>=2.32.0",
-        "transformers>=4.50.0,<5",
+        "transformers>=4.50.0",
         "retry",
         "qwen_vl_utils",
         "bitsandbytes",
         "triton >= 2.3.1",
         "accelerate >= 1.5.0",
         "einops",
-        "protobuf",
         # Compression tools
         "pyliblzfse",
         "webp>=0.3.0",
